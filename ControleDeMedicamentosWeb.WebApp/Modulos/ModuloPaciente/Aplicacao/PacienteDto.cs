@@ -8,7 +8,12 @@ public record ListarPacientesDto(
     string CPF
 );
 
-public record CadastrarPacienteDto();
+public record CadastrarPacienteDto(
+    string Nome,
+    string Telefone,
+    string CartaoSUS,
+    string CPF
+);
 
 public record EditarPacienteDto();
 
