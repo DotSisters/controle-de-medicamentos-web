@@ -75,14 +75,26 @@ public class ServicoPaciente
         return Result.Ok();
     }
 
-    public Result<EditarPacienteDto> SelecionarPorId(Guid id)
+    public Result Excluir(Guid id)
     {
         Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
 
         if (paciente == null)
             return Result.Fail("Paciente não encontrado.");
 
-        return Result.Ok(new EditarPacienteDto(
+        repositorioPaciente.Excluir(id);
+
+        return Result.Ok();
+    }
+
+    public Result<DetalhesPacienteDto> SelecionarPorId(Guid id)
+    {
+        Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
+
+        if (paciente == null)
+            return Result.Fail("Paciente não encontrado.");
+
+        return Result.Ok(new DetalhesPacienteDto(
             paciente.Id,
             paciente.Nome,
             paciente.Telefone,

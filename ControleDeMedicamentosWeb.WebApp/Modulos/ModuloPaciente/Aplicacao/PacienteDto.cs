@@ -23,4 +23,10 @@ public record EditarPacienteDto(
     string CPF
 );
 
-public record DetalhesPacienteDto();
+public record DetalhesPacienteDto(
+    Guid Id,
+    string Nome,
+    string Telefone,
+    string CartaoSUS,
+    string CPF
+);

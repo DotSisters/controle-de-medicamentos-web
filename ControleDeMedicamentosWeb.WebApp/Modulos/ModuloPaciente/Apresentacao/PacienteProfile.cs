@@ -10,8 +10,8 @@ public class PacienteProfile : Profile
         CreateMap<ListarPacientesDto, ListarPacientesViewModel>();
         CreateMap<CadastrarPacienteViewModel, CadastrarPacienteDto>();
         CreateMap<EditarPacienteViewModel, EditarPacienteDto>();
-        CreateMap<EditarPacienteDto, EditarPacienteViewModel>();
 
+        CreateMap<DetalhesPacienteDto, EditarPacienteViewModel>();
         CreateMap<DetalhesPacienteDto, ExcluirPacienteViewModel>();
     }
 }

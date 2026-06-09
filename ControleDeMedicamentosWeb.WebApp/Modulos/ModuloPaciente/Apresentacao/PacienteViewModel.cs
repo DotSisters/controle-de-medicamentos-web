@@ -48,4 +48,10 @@ public record EditarPacienteViewModel(
     string CPF
 );
 
-public record ExcluirPacienteViewModel();
+public record ExcluirPacienteViewModel(
+    Guid Id,
+    string Nome,
+    string Telefone,
+    string CartaoSUS,
+    string CPF
+);
