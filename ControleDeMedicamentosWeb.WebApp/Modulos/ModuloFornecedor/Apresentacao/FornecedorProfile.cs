@@ -8,7 +8,7 @@ public class FornecedorProfile : Profile
     public FornecedorProfile()
     {
         CreateMap<ListarFornecedoresDto, ListarFornecedoresViewModel>();
-        // CreateMap<CadastrarFornecedorViewModel, CadastrarFornecedorDto>();
+        CreateMap<CadastrarFornecedorViewModel, CadastrarFornecedorDto>();
         // CreateMap<EditarFornecedorViewModel, EditarFornecedorDto>();
 
         // CreateMap<DetalhesFornecedorDto, EditarFornecedorViewModel>();

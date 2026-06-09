@@ -8,7 +8,9 @@ public record ListarFornecedoresDto(
 );
 
 public record CadastrarFornecedorDto(
-
+    string Nome,
+    string Telefone,
+    string Cnpj
 );
 
 public record EditarFornecedorDto(
