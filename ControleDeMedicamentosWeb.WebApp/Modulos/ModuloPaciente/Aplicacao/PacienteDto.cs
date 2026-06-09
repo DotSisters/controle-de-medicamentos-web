@@ -15,6 +15,12 @@ public record CadastrarPacienteDto(
     string CPF
 );
 
-public record EditarPacienteDto();
+public record EditarPacienteDto(
+    Guid Id,
+    string Nome,
+    string Telefone,
+    string CartaoSUS,
+    string CPF
+);
 
 public record DetalhesPacienteDto();

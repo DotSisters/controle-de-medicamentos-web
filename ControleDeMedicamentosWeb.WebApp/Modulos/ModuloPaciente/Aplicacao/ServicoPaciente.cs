@@ -48,6 +48,49 @@ public class ServicoPaciente
         return Result.Ok();
     }
 
+    public Result Editar(EditarPacienteDto dto)
+    {
+        Paciente? paciente = repositorioPaciente.SelecionarPorId(dto.Id);
+
+        if (paciente == null)
+            return Result.Fail("Paciente não encontrado.");
+
+        if (ExistePacienteComMesmoCartaoSUS(dto.CartaoSUS))
+            return Falha(nameof(dto.CartaoSUS), "Já existe um paciente com este cartão do SUS cadastrado.");
+
+        Paciente pacienteAtualizado = new Paciente(
+            dto.Nome,
+            dto.Telefone,
+            dto.CartaoSUS,
+            dto.CPF
+        );
+
+        Result resultadoValidacao = ValidarEntidade(pacienteAtualizado);
+
+        if (resultadoValidacao.IsFailed)
+            return resultadoValidacao;
+
+        repositorioPaciente.Editar(dto.Id, pacienteAtualizado);
+
+        return Result.Ok();
+    }
+
+    public Result<EditarPacienteDto> SelecionarPorId(Guid id)
+    {
+        Paciente? paciente = repositorioPaciente.SelecionarPorId(id);
+
+        if (paciente == null)
+            return Result.Fail("Paciente não encontrado.");
+
+        return Result.Ok(new EditarPacienteDto(
+            paciente.Id,
+            paciente.Nome,
+            paciente.Telefone,
+            paciente.CartaoSUS,
+            paciente.CPF
+        ));
+    }
+
     private bool ExistePacienteComMesmoCartaoSUS(string cartaoSUS, Guid? idIgnorado = null)
     {
         return repositorioPaciente

@@ -51,4 +51,43 @@ public class PacienteController(ServicoPaciente servicoPaciente, IMapper mapeado
         return RedirectToAction(nameof(Listar));
     }
 
+    [HttpGet]
+    public ActionResult Editar(Guid id)
+    {
+        Result<EditarPacienteDto> resultado = servicoPaciente.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        EditarPacienteViewModel editarVm =
+            mapeador.Map<EditarPacienteViewModel>(resultado.Value);
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarPacienteViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm);
+
+        EditarPacienteDto dto = mapeador.Map<EditarPacienteDto>(editarVm);
+
+        Result resultado = servicoPaciente.Editar(dto);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+
+            return View(editarVm);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
+
+
 }
