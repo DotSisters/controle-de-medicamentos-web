@@ -12,17 +12,18 @@
     <title>@ViewBag.Titulo - Controle de Medicamentos</title>
 </head>
 
-<body
-    style="
+<body style="
         background-image: linear-gradient(-20deg, #accbee 0%, #e7f0fd 100%);
         background-repeat: no-repeat;
         background-attachment: fixed;
         min-height: 100vh;
     ">
     @* Barra de Navegação *@
-    <nav class="navbar navbar-expand-lg bg-white border-bottom" style="background-image: linear-gradient(120deg, #3279dd 0%, #0d6efd 100%);">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom"
+        style="background-image: linear-gradient(120deg, #3279dd 0%, #0d6efd 100%);">
         <div class="container">
-            <a class="navbar-brand fw-semibold text-white" asp-controller="Home" asp-action="Index">Medication Management</a>
+            <a class="navbar-brand fw-semibold text-white" asp-controller="Home" asp-action="Index">Medication
+                Management</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +33,7 @@
             <div class="collapse navbar-collapse" id="menuPrincipal">
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Início</a>
-                    <a class="nav-link text-white" asp-controller="Fornecedore" asp-action="Listar">Fornecedores</a>
+                    <a class="nav-link text-white" asp-controller="Fornecedor" asp-action="Listar">Fornecedores</a>
                     <a class="nav-link text-white" asp-controller="Paciente" asp-action="Listar">Pacientes</a>
                     <a class="nav-link text-white" asp-controller="Medicamento" asp-action="Listar">Medicamentos</a>
                     <a class="nav-link text-white" asp-controller="Funcionario" asp-action="Listar">Funcionários</a>

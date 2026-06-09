@@ -1,24 +1,26 @@
 using ControleDeMedicamentosWeb.WebApp.Compartilhado.Infra.Arquivos;
+using ControleDeMedicamentosWeb.WebApp.Modulos.ModuloFornecedor.Dominio;
+using ControleDeMedicamentosWeb.WebApp.Modulos.ModuloFornecedor.Infra;
 
 namespace ControleDeMedicamentosWeb.WebApp.Compartilhado.Infra;
 
 public static class InjecaoDependencia
 {
-  public static void AddInfraRepositories(this IServiceCollection services)
-  {
-    services.AddScoped(provider =>
+    public static void AddInfraRepositories(this IServiceCollection services)
     {
-      ContextoJson contextoJson = new ContextoJson();
+        services.AddScoped(provider =>
+        {
+            ContextoJson contextoJson = new ContextoJson();
 
-      contextoJson.Carregar();
+            contextoJson.Carregar();
 
-      return contextoJson;
-    });
+            return contextoJson;
+        });
 
-    // services.AddScoped<IRepositorioFornecedor, RepositorioFornecedorEmArquivo>();
-    // services.AddScoped<IRepositorioPaciente, RepositorioPacienteEmArquivo>();
-    // services.AddScoped<IRepositorioMedicamento, RepositorioMedicamentoEmArquivo>();
-    // services.AddScoped<IRepositorioFuncionario, RepositorioFuncionarioEmArquivo>();
-    // services.AddScoped<IRepositorioEstoque, RepositorioEstoqueEmArquivo>();
-  }
+        services.AddScoped<IRepositorioFornecedor, RepositorioFornecedorEmArquivo>();
+        // services.AddScoped<IRepositorioPaciente, RepositorioPacienteEmArquivo>();
+        // services.AddScoped<IRepositorioMedicamento, RepositorioMedicamentoEmArquivo>();
+        // services.AddScoped<IRepositorioFuncionario, RepositorioFuncionarioEmArquivo>();
+        // services.AddScoped<IRepositorioEstoque, RepositorioEstoqueEmArquivo>();
+    }
 }

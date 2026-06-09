@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Modulos/" />
+    <Folder Include="Modulos\ModuloFornecedor\" />
   </ItemGroup>
 
 </Project>
