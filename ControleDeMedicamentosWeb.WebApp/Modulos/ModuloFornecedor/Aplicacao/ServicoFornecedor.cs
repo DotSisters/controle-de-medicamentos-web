@@ -31,6 +31,32 @@ public class ServicoFornecedor
         return Result.Ok();
     }
 
+    public Result Editar(EditarFornecedorDto dto)
+    {
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(dto.Id);
+
+        if (fornecedor == null)
+            return Result.Fail("Fornecedor não encontrado.");
+
+        if (ExisteFornecedorCnpj(dto.Cnpj, dto.Id))
+            return Falha(nameof(dto.Cnpj), "Já existe um fornecedor com este CNPJ cadastrado.");
+
+        Fornecedor pacienteAtualizado = new Fornecedor(
+            dto.Nome,
+            dto.Telefone,
+            dto.Cnpj
+        );
+
+        Result resultadoValidacao = ValidarEntidade(pacienteAtualizado);
+
+        if (resultadoValidacao.IsFailed)
+            return resultadoValidacao;
+
+        repositorioFornecedor.Editar(dto.Id, pacienteAtualizado);
+
+        return Result.Ok();
+    }
+
     public List<ListarFornecedoresDto> SelecionarTodos()
     {
         return repositorioFornecedor
@@ -46,7 +72,14 @@ public class ServicoFornecedor
         if (fornecedor == null)
             return Result.Fail("Fornecedor não encontrado.");
 
-        return Result.Ok(new DetalhesFornecedorDto());
+        return Result.Ok(
+            new DetalhesFornecedorDto(
+                fornecedor.Id,
+                fornecedor.Nome,
+                fornecedor.Telefone,
+                fornecedor.Cnpj
+            )
+        );
     }
 
     private bool ExisteFornecedorCnpj(string cnpj, Guid? idIgnorado = null)

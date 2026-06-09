@@ -8,9 +8,11 @@ public class Fornecedor : EntidadeBase<Fornecedor>
     public string Telefone { get; set; } = string.Empty;
     public string Cnpj { get; set; } = string.Empty;
 
-    public Fornecedor() { }
+    public Fornecedor()
+    {
+    }
 
-    public Fornecedor(string nome, string telefone, string cnpj) : this()
+    public Fornecedor(string nome, string telefone, string cnpj)
     {
         Nome = nome;
         Telefone = telefone;
@@ -100,7 +102,6 @@ public class Fornecedor : EntidadeBase<Fornecedor>
                 .ToString(@"00\.000\.000\/0000\-00");
         }
     }
-
 
     public override void Atualizar(Fornecedor entidadeAtualizada)
     {

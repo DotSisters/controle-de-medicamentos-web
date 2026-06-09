@@ -14,8 +14,15 @@ public record CadastrarFornecedorDto(
 );
 
 public record EditarFornecedorDto(
+    Guid Id,
+    string Nome,
+    string Telefone,
+    string Cnpj
 );
 
 public record DetalhesFornecedorDto(
-
+    Guid Id,
+    string Nome,
+    string Telefone,
+    string Cnpj
 );

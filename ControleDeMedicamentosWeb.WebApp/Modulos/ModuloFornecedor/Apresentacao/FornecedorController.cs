@@ -17,7 +17,6 @@ public class FornecedorController(ServicoFornecedor servicoFornecedor, IMapper m
         return View(listarVms);
     }
 
-
     [HttpGet]
     public ActionResult Cadastrar()
     {
@@ -46,6 +45,43 @@ public class FornecedorController(ServicoFornecedor servicoFornecedor, IMapper m
             ModelState.AddModelError(resultado);
 
             return View(cadastrarVm);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
+
+    [HttpGet]
+    public ActionResult Editar(Guid id)
+    {
+        Result<DetalhesFornecedorDto> resultado = servicoFornecedor.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        EditarFornecedorViewModel editarVm = mapeador.Map<EditarFornecedorViewModel>(resultado.Value);
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarFornecedorViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm);
+
+        EditarFornecedorDto dto = mapeador.Map<EditarFornecedorDto>(editarVm);
+
+        Result resultado = servicoFornecedor.Editar(dto);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+
+            return View(editarVm);
         }
 
         return RedirectToAction(nameof(Listar));
