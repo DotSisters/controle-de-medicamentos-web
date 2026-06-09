@@ -12,7 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Modulos/" />
+    <Folder Include="Modulos/ModuloPaciente/Aplicacao/" />
+    <Folder Include="Modulos/ModuloPaciente/Apresentacao/" />
+    <Folder Include="Modulos/ModuloPaciente/Apresentacao/Views/" />
+    <Folder Include="Modulos/ModuloPaciente/Infra/" />
   </ItemGroup>
 
 </Project>
