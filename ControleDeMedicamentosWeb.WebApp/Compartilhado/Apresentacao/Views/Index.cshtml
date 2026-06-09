@@ -1,43 +1,64 @@
-@{
-    Layout = "_Layout";
-    ViewBag.Titulo = "Página Inicial";
+﻿@{
+Layout = "_Layout";
+ViewBag.Titulo = "Página Inicial";
 }
 
-<div class="row g-2">
-    <div class="col-lg-7">
-        <h1 class="display-5 fw-semibold mb-3">Lista de Compras</h1>
-        <p class="lead text-secondary mb-4">
-            Planeje suas compras diárias e do mês, incluindo categorias, produtos, listas e itens.
-        </p>
+<div class="row">
+  <div class="col-lg-7">
+    <h1 class="display-5 fw-semibold mb-3">Controle de Medicamentos</h1>
+    <p class="lead text-secondary mb-4">
+      Gerencie o controle de medicamentos cadastrando fármacos, organizando estoques e registrando entradas e saídas.
+    </p>
 
-        <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-primary rounded-pill px-4" asp-controller="Categoria" asp-action="Listar">Categorias</a>
-            <a class="btn btn-primary rounded-pill px-4" asp-controller="Produto" asp-action="Listar">Produtos</a>
-            <a class="btn btn-primary rounded-pill px-4" asp-controller="ListaCompras" asp-action="Listar">Listas de Compras</a>
-        </div>
-
+    <div class="d-flex flex-wrap gap-2">
+      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Fornecedor" asp-action="Listar">Fornecedores</a>
+      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Paciente" asp-action="Listar">Pacientes</a>
+      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Medicamento"
+         asp-action="Listar">Medicamentos</a>
+      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Funcionario"
+         asp-action="Listar">Funcionários</a>
+      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Estoque" asp-action="Listar">Estoque</a>
     </div>
 
-    <div class="col-lg-5">
-        <div class="card border-primary-subtle shadow-sm">
-            <div class="card-body p-4">
-                <h3 class="h5 text-primary mb-3">Módulos disponíveis</h3>
+  </div>
 
-                <div class="list-group">
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" asp-controller="Categoria" asp-action="Listar">
-                        Controle de Categorias
-                        <span class="badge text-bg-primary rounded-pill">Abrir</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" asp-controller="Produto" asp-action="Listar">
-                        Controle de Produtos
-                        <span class="badge text-bg-primary rounded-pill">Abrir</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" asp-controller="ListaCompras" asp-action="Listar">
-                        Controle de Listas de Compras
-                        <span class="badge text-bg-primary rounded-pill">Abrir</span>
-                    </a>
-                </div>
-            </div>
+  <div class="col-lg-5">
+    <div class="card border-primary-subtle shadow-sm bg-transparent">
+      <div class="card-body p-4 bg-transparent">
+        <h3 class="h5 text-primary mb-4">Módulos disponíveis</h3>
+
+        <div class="list-group">
+          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+             asp-controller="Fornecedor" asp-action="Listar">
+            🏷️ Controle de Fornecedores
+            <span class="badge text-bg-primary rounded-pill">Abrir</span>
+          </a>
+
+          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+             asp-controller="Paciente" asp-action="Listar">
+            🧑‍⚕️ Controle de Pacientes
+            <span class="badge text-bg-primary rounded-pill">Abrir</span>
+          </a>
+
+          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+             asp-controller="Medicamento" asp-action="Listar">
+            💊 Controle de Medicamentos
+            <span class="badge text-bg-primary rounded-pill">Abrir</span>
+          </a>
+
+          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+             asp-controller="Funcionario" asp-action="Listar">
+            👩‍💼 Controle de Funcionários
+            <span class="badge text-bg-primary rounded-pill">Abrir</span>
+          </a>
+
+          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+             asp-controller="Estoque" asp-action="Listar">
+            📦 Controle de Estoque
+            <span class="badge text-bg-primary rounded-pill">Abrir</span>
+          </a>
         </div>
+      </div>
     </div>
+  </div>
 </div>

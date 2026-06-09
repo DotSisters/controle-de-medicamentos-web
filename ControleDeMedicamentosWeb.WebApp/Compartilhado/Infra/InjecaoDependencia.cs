@@ -14,5 +14,11 @@ public static class InjecaoDependencia
 
       return contextoJson;
     });
+
+    // services.AddScoped<IRepositorioFornecedor, RepositorioFornecedorEmArquivo>();
+    // services.AddScoped<IRepositorioPaciente, RepositorioPacienteEmArquivo>();
+    // services.AddScoped<IRepositorioMedicamento, RepositorioMedicamentoEmArquivo>();
+    // services.AddScoped<IRepositorioFuncionario, RepositorioFuncionarioEmArquivo>();
+    // services.AddScoped<IRepositorioEstoque, RepositorioEstoqueEmArquivo>();
   }
 }

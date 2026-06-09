@@ -5,10 +5,11 @@ namespace ControleDeMedicamentosWeb.WebApp.Compartilhado.Infra.Arquivos;
 
 public sealed class ContextoJson
 {
-  // public List<Categoria> Categorias { get; set; } = new List<Categoria>();
-  // public List<Produto> Produtos { get; set; } = new List<Produto>();
-  // public List<ListaCompras> ListasCompras { get; set; } = new List<ListaCompras>();
-  // public List<ItemLista> ItensLista { get; set; } = new List<ItemLista>();
+  // public List<Fornecedor> Fornecedores { get; set; } = new List<Fornecedor>();
+  // public List<Paciente> Pacientes { get; set; } = new List<Categoria>();
+  // public List<Medicamento> Medicamentos { get; set; } = new List<Medicamento>();
+  // public List<Funcionario> Funcionarios { get; set; } = new List<Funcionario>();
+  // public List<Estoque> Estoque { get; set; } = new List<Estoque>();
 
   private readonly string caminhoArquivo;
 
@@ -55,9 +56,10 @@ public sealed class ContextoJson
     if (contextoSalvo == null)
       return;
 
-    // Categorias = contextoSalvo.Categorias;
-    // Produtos = contextoSalvo.Produtos;
-    // ListasCompras = contextoSalvo.ListasCompras;
-    // ItensLista = contextoSalvo.ItensLista;
+    // Pacientes = contextoSalvo.Pacientes;
+    // Fornecedores = contextoSalvo.Fornecedores;
+    // Medicamentos = contextoSalvo.Medicamentos;
+    // Funcionarios = contextoSalvo.Funcionarios;
+    // Estoque = contextoSalvo.Estoque;
   }
 }
