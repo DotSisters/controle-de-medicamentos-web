@@ -96,11 +96,13 @@ public class ServicoFornecedor
 
     private bool ExisteFornecedorCnpj(string cnpj, Guid? idIgnorado = null)
     {
+        string cnpjNormalizado = Fornecedor.RemoverFormatacao(cnpj);
+
         return repositorioFornecedor
             .SelecionarTodos()
             .Any(f =>
                 f.Id != idIgnorado &&
-                string.Equals(f.Cnpj, cnpj, StringComparison.OrdinalIgnoreCase)
+                Fornecedor.RemoverFormatacao(f.Cnpj) == cnpjNormalizado
             );
     }
 

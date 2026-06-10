@@ -123,7 +123,7 @@ public class Fornecedor : EntidadeBase<Fornecedor>
         return true;
     }
 
-    private string RemoverFormatacao(string valor)
+    public static string RemoverFormatacao(string valor)
     {
         return valor
             .Replace(" ", "")
