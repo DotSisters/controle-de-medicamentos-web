@@ -51,6 +51,44 @@ public class MedicamentoController(ServicoMedicamento servicoMedicamento, IMappe
         return RedirectToAction(nameof(Listar));
     }
 
+    [HttpGet]
+    public ActionResult Editar(Guid id)
+    {
+        Result<DetalhesMedicamentoDto> resultado = servicoMedicamento.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        EditarMedicamentoViewModel editarVm =
+            mapeador.Map<EditarMedicamentoViewModel>(resultado.Value) with { Fornecedores = SelecionarFornecedores() };
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarMedicamentoViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm with { Fornecedores = SelecionarFornecedores() });
+
+        EditarMedicamentoDto dto = mapeador.Map<EditarMedicamentoDto>(editarVm);
+
+        Result resultado = servicoMedicamento.Editar(dto);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+
+            return View(editarVm with { Fornecedores = SelecionarFornecedores() });
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
+
     private List<OpcaoFornecedorViewModel> SelecionarFornecedores()
     {
         List<OpcaoFornecedorDto> dtos = servicoMedicamento.SelecionarFornecedores();

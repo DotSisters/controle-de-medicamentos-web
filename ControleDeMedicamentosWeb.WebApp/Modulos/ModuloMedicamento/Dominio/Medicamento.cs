@@ -5,13 +5,13 @@ namespace ControleDeMedicamentosWeb.WebApp.Modulos.ModuloMedicamento.Dominio;
 
 public class Medicamento : EntidadeBase<Medicamento>
 {
-    public string Nome { get; set; }
+    public string Nome { get; set; } = string.Empty;
     public int QuantidadeEstoque { get; set; }
-    public string Descricao { get; set; }
+    public string Descricao { get; set; } = string.Empty;
 
     // public List<Entrada> RequisicoesDeEntrada { get; set; } = [];
     // public List<Saida> RequisicoesDeSaida { get; set; } = [];
-    public Fornecedor Fornecedor { get; set; }
+    public Fornecedor Fornecedor { get; set; } = null!;
     // public string StatusEstoque => QuantidadeEstoque < 20 ? "EM FALTA" : "EM ESTOQUE";
 
     public Medicamento()

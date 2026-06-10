@@ -43,6 +43,35 @@ public class ServicoMedicamento
         return Result.Ok();
     }
 
+    public Result Editar(EditarMedicamentoDto dto)
+    {
+        Medicamento? produto = repositorioMedicamento.SelecionarPorId(dto.Id);
+
+        if (produto == null)
+            return Result.Fail("Medicamento não encontrado.");
+
+        Fornecedor? fornecedorSelecionado = repositorioFornecedor.SelecionarPorId(dto.FornecedorId);
+
+        if (fornecedorSelecionado == null)
+            return Falha(nameof(dto.FornecedorId), "Selecione um fornecedor válido.");
+
+        Medicamento medicamentoAtualizado = new Medicamento(
+            dto.Nome,
+            dto.Descricao,
+            dto.QuantidadeEstoque,
+            fornecedorSelecionado
+        );
+
+        Result resultadoValidacao = ValidarEntidade(medicamentoAtualizado);
+
+        if (resultadoValidacao.IsFailed)
+            return resultadoValidacao;
+
+        repositorioMedicamento.Editar(dto.Id, medicamentoAtualizado);
+
+        return Result.Ok();
+    }
+
     public List<ListarMedicamentosDto> SelecionarTodos()
     {
         return repositorioMedicamento
@@ -69,7 +98,8 @@ public class ServicoMedicamento
                 medicamento.Id,
                 medicamento.Nome,
                 medicamento.QuantidadeEstoque,
-                medicamento.Descricao
+                medicamento.Descricao,
+                medicamento.Fornecedor.Id
             )
         );
     }

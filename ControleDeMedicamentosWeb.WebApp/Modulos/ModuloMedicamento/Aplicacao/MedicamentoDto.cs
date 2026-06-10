@@ -16,11 +16,19 @@ public record CadastrarMedicamentoDto(
     Guid FornecedorId
 );
 
+public record EditarMedicamentoDto(
+    Guid Id,
+    string Nome,
+    int QuantidadeEstoque,
+    string Descricao,
+    Guid FornecedorId
+);
 public record DetalhesMedicamentoDto(
     Guid Id,
     string Nome,
     int QuantidadeEstoque,
-    string Descricao
+    string Descricao,
+    Guid FornecedorId
 );
 
 public record OpcaoFornecedorDto(
