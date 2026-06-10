@@ -40,5 +40,8 @@ public record EditarFornecedorViewModel(
 );
 
 public record ExcluirFornecedorViewModel(
-
+    Guid Id,
+    string Nome,
+    string Telefone,
+    string Cnpj
 );

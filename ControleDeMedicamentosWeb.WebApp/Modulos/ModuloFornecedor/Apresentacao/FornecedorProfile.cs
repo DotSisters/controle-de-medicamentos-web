@@ -12,7 +12,6 @@ public class FornecedorProfile : Profile
         CreateMap<EditarFornecedorViewModel, EditarFornecedorDto>();
 
         CreateMap<DetalhesFornecedorDto, EditarFornecedorViewModel>();
-        // CreateMap<DetalhesFornecedorDto, ExcluirFornecedorViewModel>();
-
+        CreateMap<DetalhesFornecedorDto, ExcluirFornecedorViewModel>();
     }
 }

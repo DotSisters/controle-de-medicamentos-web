@@ -57,6 +57,18 @@ public class ServicoFornecedor
         return Result.Ok();
     }
 
+    public Result Excluir(Guid id)
+    {
+        Fornecedor? fornecedor = repositorioFornecedor.SelecionarPorId(id);
+
+        if (fornecedor == null)
+            return Result.Fail("Paciente não encontrado.");
+
+        repositorioFornecedor.Excluir(id);
+
+        return Result.Ok();
+    }
+
     public List<ListarFornecedoresDto> SelecionarTodos()
     {
         return repositorioFornecedor
