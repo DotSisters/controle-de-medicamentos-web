@@ -25,6 +25,7 @@
     <Folder Include="Modulos/ModuloPaciente/Apresentacao/Views/" />
     <Folder Include="Modulos/ModuloPaciente/Infra/" />
     <Folder Include="Modulos\ModuloFornecedor\" />
+    <Folder Include="Modulos\ModuloMedicamento\" />
   </ItemGroup>
 
 </Project>
