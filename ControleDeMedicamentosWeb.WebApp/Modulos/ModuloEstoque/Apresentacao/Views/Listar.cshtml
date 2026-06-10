@@ -1,0 +1,70 @@
+﻿@{
+Layout = "_Layout";
+ViewBag.Titulo = "Estoque";
+ViewBag.Info = "Cadastre, visualize e gerencie requisições de entrada e de saída do estoque.";
+}
+
+@model List<ListarRequisicoesEntradaViewModel>;
+
+   <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h3 class="mb-1">Requisições de Entrada</h3>
+        <p class="mb-0">Visualize e cadastre requisições de entrada.</p>
+    </div>
+
+    <a class="btn btn-primary rounded-pill px-4"
+       asp-action="CadastrarEntrada">
+        Cadastrar Entrada
+    </a>
+</div>
+
+    @if (TempData["MensagemErro"] is string mensagemErro)
+    {
+    <div class="alert alert-danger border-start border-danger border-4 rounded-3" role="alert">
+        @mensagemErro
+    </div>
+    }
+
+    @if (Model.Count == 0)
+    {
+    <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+        Nenhuma requisição de entrada cadastrada.
+    </div>
+    }
+    else
+    {
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle bg-white">
+            <thead class=" table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>Data de Criação</th>
+                    <th>Funcionário</th>
+                    <th>Medicamento</th>
+                    <th>Quantidade</th>
+                    @* <th>Ações</th> *@
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ListarRequisicoesEntradaViewModel e in Model)
+                {
+                <tr class="bg-transparent">
+                    <td>@e.Id.ToString().Substring(startIndex: 0, length: 8)</td>
+                    <td>@e.DataCriacao.ToString("dd/MM/yyyy")</td>
+                    <td>@e.NomeFuncionario</td>
+                    <td>@e.NomeMedicamento</td>
+                    <td>@e.Quantidade</td>
+                    @* <td>
+                        <div class="d-flex flex-sm-row flex-column gap-2">
+                            <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
+                                asp-route-id="@m.Id">Editar</a>
+                            <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
+                                asp-route-id="@m.Id">Excluir</a>
+                        </div>
+                    </td> *@
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
