@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Modulos/ModuloEstoque/Apresentacao/" />
+    <Folder Include="Modulos/ModuloEstoque/Apresentacao/Views/" />
     <Folder Include="Modulos/ModuloFuncionario/" />
     <Folder Include="Modulos/ModuloFuncionario/Aplicacao/" />
     <Folder Include="Modulos/ModuloFuncionario/Apresentacao/" />
