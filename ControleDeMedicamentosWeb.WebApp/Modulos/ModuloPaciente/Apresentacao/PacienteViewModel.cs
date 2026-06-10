@@ -36,7 +36,7 @@ public record EditarPacienteViewModel(
     string Nome,
 
     [Required(ErrorMessage = "O campo \"Telefone\" deve ser preenchido.")]
-    [RegularExpression(@"^\d{10,11}$", ErrorMessage = "O campo \"Telefone\" deve conter entre 10 e 11 dígitos.")]
+    [RegularExpression(@"^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$", ErrorMessage = "O campo \"Telefone\" deve conter entre 10 e 11 dígitos.")]
     string Telefone,
 
     [Required(ErrorMessage = "O campo \"Cartão SUS\" deve ser preenchido.")]
@@ -44,7 +44,7 @@ public record EditarPacienteViewModel(
     string CartaoSUS,
 
     [Required(ErrorMessage = "O campo \"CPF\" deve ser preenchido.")]
-    [RegularExpression(@"^\d{11}$", ErrorMessage = "O campo \"CPF\" deve conter 11 dígitos.")]
+    [RegularExpression(@"^(\d{11}|\d{3}\.\d{3}\.\d{3}-\d{2})$", ErrorMessage = "O campo \"CPF\" deve conter 11 dígitos.")]
     string CPF
 );
 
