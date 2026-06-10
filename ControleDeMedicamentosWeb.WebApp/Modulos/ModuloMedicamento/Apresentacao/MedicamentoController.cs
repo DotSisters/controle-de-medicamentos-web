@@ -89,6 +89,34 @@ public class MedicamentoController(ServicoMedicamento servicoMedicamento, IMappe
         return RedirectToAction(nameof(Listar));
     }
 
+    [HttpGet]
+    public ActionResult Excluir(Guid id)
+    {
+        Result<DetalhesMedicamentoDto> resultado = servicoMedicamento.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        ExcluirMedicamentoViewModel excluirVm = mapeador.Map<ExcluirMedicamentoViewModel>(resultado.Value);
+
+        return View(excluirVm);
+    }
+
+    [HttpPost]
+    public ActionResult Excluir(ExcluirMedicamentoViewModel excluirVm)
+    {
+        Result resultado = servicoMedicamento.Excluir(excluirVm.Id);
+
+        if (resultado.IsFailed)
+            TempData.AddErrorMessage(resultado);
+
+        return RedirectToAction(nameof(Listar));
+    }
+
     private List<OpcaoFornecedorViewModel> SelecionarFornecedores()
     {
         List<OpcaoFornecedorDto> dtos = servicoMedicamento.SelecionarFornecedores();

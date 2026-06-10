@@ -28,7 +28,8 @@ public record DetalhesMedicamentoDto(
     string Nome,
     int QuantidadeEstoque,
     string Descricao,
-    Guid FornecedorId
+    Guid FornecedorId,
+    string FornecedorNome
 );
 
 public record OpcaoFornecedorDto(

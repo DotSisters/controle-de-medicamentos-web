@@ -72,6 +72,18 @@ public class ServicoMedicamento
         return Result.Ok();
     }
 
+    public Result Excluir(Guid id)
+    {
+        Medicamento? medicamento = repositorioMedicamento.SelecionarPorId(id);
+
+        if (medicamento == null)
+            return Result.Fail("Medicamento não encontrado.");
+
+        repositorioMedicamento.Excluir(id);
+
+        return Result.Ok();
+    }
+
     public List<ListarMedicamentosDto> SelecionarTodos()
     {
         return repositorioMedicamento
@@ -99,7 +111,8 @@ public class ServicoMedicamento
                 medicamento.Nome,
                 medicamento.QuantidadeEstoque,
                 medicamento.Descricao,
-                medicamento.Fornecedor.Id
+                medicamento.Fornecedor.Id,
+                medicamento.Fornecedor.Nome
             )
         );
     }

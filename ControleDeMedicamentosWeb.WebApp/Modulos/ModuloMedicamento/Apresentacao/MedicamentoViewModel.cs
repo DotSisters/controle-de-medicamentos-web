@@ -56,3 +56,12 @@ public record EditarMedicamentoViewModel(
 
     [ValidateNever] List<OpcaoFornecedorViewModel> Fornecedores
 );
+
+public record ExcluirMedicamentoViewModel
+{
+    public Guid Id { get; init; }
+    public string Nome { get; init; } = string.Empty;
+    public int QuantidadeEstoque { get; init; }
+    public string Descricao { get; init; } = string.Empty;
+    public string FornecedorNome { get; init; } = string.Empty;
+}
