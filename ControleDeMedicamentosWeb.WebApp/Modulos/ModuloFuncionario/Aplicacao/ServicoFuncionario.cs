@@ -46,6 +46,47 @@ public class ServicoFuncionario
         return Result.Ok();
     }
 
+    public Result Editar(EditarFuncionarioDto dto)
+    {
+        Funcionario? funcionario = repositorioFuncionario.SelecionarPorId(dto.Id);
+
+        if (funcionario == null)
+            return Result.Fail("Funcionario não encontrado.");
+
+        if (ExisteFuncionarioComMesmoCPF(dto.CPF, dto.Id))
+            return Falha(nameof(dto.CPF), "Já existe um funcionário com este CPF cadastrado.");
+
+        Funcionario pacienteAtualizado = new Funcionario(
+            dto.Nome,
+            dto.Telefone,
+            dto.CPF
+        );
+
+        Result resultadoValidacao = ValidarEntidade(pacienteAtualizado);
+
+        if (resultadoValidacao.IsFailed)
+            return resultadoValidacao;
+
+        repositorioFuncionario.Editar(dto.Id, pacienteAtualizado);
+
+        return Result.Ok();
+    }
+
+    public Result<DetalhesFuncionarioDto> SelecionarPorId(Guid id)
+    {
+        Funcionario? funcionario = repositorioFuncionario.SelecionarPorId(id);
+
+        if (funcionario == null)
+            return Result.Fail("Funcionario não encontrado.");
+
+        return Result.Ok(new DetalhesFuncionarioDto(
+            funcionario.Id,
+            funcionario.Nome,
+            funcionario.Telefone,
+            funcionario.CPF
+        ));
+    }
+
     private bool ExisteFuncionarioComMesmoCPF(string cpf, Guid? idIgnorado = null)
     {
         return repositorioFuncionario
@@ -55,6 +96,7 @@ public class ServicoFuncionario
                 string.Equals(f.CPF, cpf, StringComparison.OrdinalIgnoreCase)
             );
     }
+
     private static Result ValidarEntidade(Funcionario funcionario)
     {
         List<string> erros = funcionario.Validar();

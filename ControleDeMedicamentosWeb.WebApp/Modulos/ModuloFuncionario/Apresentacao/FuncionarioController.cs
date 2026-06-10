@@ -49,4 +49,42 @@ public class FuncionarioController(ServicoFuncionario servicoFuncionario, IMappe
 
         return RedirectToAction(nameof(Listar));
     }
+
+    [HttpGet]
+    public ActionResult Editar(Guid id)
+    {
+        Result<DetalhesFuncionarioDto> resultado = servicoFuncionario.SelecionarPorId(id);
+
+        if (resultado.IsFailed)
+        {
+            TempData.AddErrorMessage(resultado);
+
+            return RedirectToAction(nameof(Listar));
+        }
+
+        EditarFuncionarioViewModel editarVm =
+            mapeador.Map<EditarFuncionarioViewModel>(resultado.Value);
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public ActionResult Editar(EditarFuncionarioViewModel editarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(editarVm);
+
+        EditarFuncionarioDto dto = mapeador.Map<EditarFuncionarioDto>(editarVm);
+
+        Result resultado = servicoFuncionario.Editar(dto);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+
+            return View(editarVm);
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
 }

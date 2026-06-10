@@ -13,6 +13,5 @@ public class FuncionarioProfile : Profile
 
         CreateMap<DetalhesFuncionarioDto, EditarFuncionarioViewModel>();
         CreateMap<DetalhesFuncionarioDto, ExcluirFuncionarioViewModel>();
-
     }
 }
