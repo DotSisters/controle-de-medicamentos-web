@@ -55,7 +55,7 @@ public class ServicoPaciente
         if (paciente == null)
             return Result.Fail("Paciente não encontrado.");
 
-        if (ExistePacienteComMesmoCartaoSUS(dto.CartaoSUS))
+        if (ExistePacienteComMesmoCartaoSUS(dto.CartaoSUS, dto.Id))
             return Falha(nameof(dto.CartaoSUS), "Já existe um paciente com este cartão do SUS cadastrado.");
 
         Paciente pacienteAtualizado = new Paciente(
