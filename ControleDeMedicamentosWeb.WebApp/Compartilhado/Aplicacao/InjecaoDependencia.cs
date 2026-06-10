@@ -8,7 +8,7 @@ public static class InjecaoDependencia
     {
         services.AddScoped<ServicoFornecedor>();
         // services.AddScoped<ServicoPaciente>();
-        // services.AddScoped<ServicoMedicamento>();
+        services.AddScoped<ServicoMedicamento>();
         // services.AddScoped<ServicoFuncionario>();
         // services.AddScoped<ServicoEstoque>();
     }
