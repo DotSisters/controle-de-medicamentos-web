@@ -1,4 +1,5 @@
 using ControleDeMedicamentosWeb.WebApp.Modulos.ModuloFornecedor.Aplicacao;
+using ControleDeMedicamentosWeb.WebApp.Modulos.ModuloMedicamento.Aplicacao;
 
 namespace ControleDeMedicamentosWeb.WebApp.Compartilhado.Aplicacao;
 
