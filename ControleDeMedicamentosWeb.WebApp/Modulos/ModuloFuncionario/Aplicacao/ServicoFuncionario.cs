@@ -72,6 +72,18 @@ public class ServicoFuncionario
         return Result.Ok();
     }
 
+    public Result Excluir(Guid id)
+    {
+        Funcionario? paciente = repositorioFuncionario.SelecionarPorId(id);
+
+        if (paciente == null)
+            return Result.Fail("Funcionário não encontrado.");
+
+        repositorioFuncionario.Excluir(id);
+
+        return Result.Ok();
+    }
+
     public Result<DetalhesFuncionarioDto> SelecionarPorId(Guid id)
     {
         Funcionario? funcionario = repositorioFuncionario.SelecionarPorId(id);
