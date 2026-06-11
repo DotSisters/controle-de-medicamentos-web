@@ -29,7 +29,6 @@ public class ServicoMedicamento
         Medicamento novoMedicamento = new Medicamento(
             dto.Nome,
             dto.Descricao,
-            dto.QuantidadeEstoque,
             fornecedorSelecionado
         );
 
@@ -58,7 +57,6 @@ public class ServicoMedicamento
         Medicamento medicamentoAtualizado = new Medicamento(
             dto.Nome,
             dto.Descricao,
-            dto.QuantidadeEstoque,
             fornecedorSelecionado
         );
 
@@ -93,7 +91,8 @@ public class ServicoMedicamento
             m.Nome,
             m.QuantidadeEstoque,
             m.Descricao,
-            m.Fornecedor.Nome
+            m.Fornecedor.Nome,
+            m.StatusEstoque
              ))
             .ToList();
     }

@@ -22,7 +22,7 @@ public class MedicamentoController(ServicoMedicamento servicoMedicamento, IMappe
     {
         CadastrarMedicamentoViewModel cadastrarVm = new CadastrarMedicamentoViewModel(
             string.Empty,
-            0,
+            // 0,
             string.Empty,
             string.Empty,
             SelecionarFornecedores()

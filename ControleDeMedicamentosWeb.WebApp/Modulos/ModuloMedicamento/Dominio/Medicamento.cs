@@ -1,4 +1,6 @@
 using ControleDeMedicamentosWeb.WebApp.Compartilhado.Dominio;
+using ControleDeMedicamentosWeb.WebApp.Modulos.ModuloEstoque.Dominio;
+using ControleDeMedicamentosWeb.WebApp.Modulos.ModuloEstoque.Dominio.Base;
 using ControleDeMedicamentosWeb.WebApp.Modulos.ModuloFornecedor.Dominio;
 
 namespace ControleDeMedicamentosWeb.WebApp.Modulos.ModuloMedicamento.Dominio;
@@ -6,41 +8,51 @@ namespace ControleDeMedicamentosWeb.WebApp.Modulos.ModuloMedicamento.Dominio;
 public class Medicamento : EntidadeBase<Medicamento>
 {
     public string Nome { get; set; } = string.Empty;
-    public int QuantidadeEstoque { get; set; }
     public string Descricao { get; set; } = string.Empty;
-
-    // public List<Entrada> RequisicoesDeEntrada { get; set; } = [];
-    // public List<Saida> RequisicoesDeSaida { get; set; } = [];
+    public List<RequisicaoBase> Requisicoes { get; set; } = new List<RequisicaoBase>();
     public Fornecedor Fornecedor { get; set; } = null!;
-    // public string StatusEstoque => QuantidadeEstoque < 20 ? "EM FALTA" : "EM ESTOQUE";
+    public uint QuantidadeEstoque
+    {
+        get
+        {
+            uint quantidadeEstoque = 0;
+
+            foreach (RequisicaoBase req in Requisicoes)
+            {
+                if (req is RequisicaoEntrada reqEntrada)
+                    quantidadeEstoque += reqEntrada.Quantidade;
+
+                else if (req is RequisicaoSaida reqSaida)
+                {
+                    foreach (MedicamentoPrescrito medPresc in reqSaida.MedicamentosPrescritos)
+                    {
+                        if (medPresc.Medicamento == this)
+                            quantidadeEstoque -= medPresc.Quantidade;
+                    }
+                }
+            }
+
+            return quantidadeEstoque;
+        }
+    }
+
+    public string StatusEstoque => QuantidadeEstoque < 20 ? "Em falta" : "Em estoque";
 
     public Medicamento()
     {
     }
 
-    public Medicamento(string nome, string descricao, int quantidadeEstoque, Fornecedor fornecedor)
+    public Medicamento(string nome, string descricao, Fornecedor fornecedor)
     {
         Nome = nome;
         Descricao = descricao;
-        QuantidadeEstoque = quantidadeEstoque;
         Fornecedor = fornecedor;
     }
 
-    // public void RegistrarRequisicaoEntrada(Entrada requisicao)
-    // {
-    //     RequisicoesDeEntrada.Add(requisicao);
-    //     QuantidadeEstoque += (int)requisicao.Quantidade;
-    // }
-
-    // public void RegistrarRequisicaoSaida(Saida requisicao)
-    // {
-    //     RequisicoesDeSaida.Add(requisicao);
-
-    //     var medPrescrito = requisicao.MedicamentosPrescritos.FirstOrDefault(mp => mp.Medicamento == this);
-
-    //     if (medPrescrito != null)
-    //         QuantidadeEstoque -= (int)medPrescrito.Quantidade;
-    // }
+    public void RegistrarRequisicao(RequisicaoBase requisicao)
+    {
+        Requisicoes.Add(requisicao);
+    }
 
     public override List<string> Validar()
     {
@@ -62,6 +74,5 @@ public class Medicamento : EntidadeBase<Medicamento>
         Nome = medicamentoAtualizado.Nome;
         Descricao = medicamentoAtualizado.Descricao;
         Fornecedor = medicamentoAtualizado.Fornecedor;
-        QuantidadeEstoque = medicamentoAtualizado.QuantidadeEstoque;
     }
 }
