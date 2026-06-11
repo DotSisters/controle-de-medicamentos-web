@@ -1,5 +1,77 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+Layout = "_Layout";
+ViewBag.Titulo = "Cadastrar Requisição de Saída";
+ViewBag.Info = "";
 }
+
+@model CadastrarRequisicaoSaidaViewModel
+
+@if (Model.Pacientes.Count == 0)
+{
+<div class="alert alert-primary border-start border-primary border-4 rounded-3 mx-auto" style="max-width: 620px;"
+    role="alert">
+    Cadastre um paciente antes de cadastrar requisições de saída.
+</div>
+}
+
+@if (Model.Medicamentos.Count == 0)
+{
+<div class="alert alert-primary border-start border-primary border-4 rounded-3 mx-auto" style="max-width: 620px;"
+    role="alert">
+    Cadastre um medicamento antes de cadastrar requisições de saída.
+</div>
+}
+
+<form class="card border-primary-subtle shadow-sm mx-auto p-4 bg-transparent" style="max-width: 620px;"
+    asp-action="CadastrarSaida" method="post">
+
+    <!-- Paciente -->
+    <div class="mb-3">
+        <label asp-for="PacienteId" class="form-label fw-semibold text-primary text-uppercase small">Paciente</label>
+        <select asp-for="PacienteId" class="form-select">
+            <option value="">Selecione um paciente</option>
+            @foreach (OpcaoPacienteViewModel paciente in Model.Pacientes)
+            {
+            <option value="@paciente.Id">@paciente.Nome</option>
+            }
+        </select>
+        <span asp-validation-for="PacienteId" class="text-danger small fw-semibold"></span>
+    </div>
+
+    <!-- Medicamentos Prescritos -->
+    @for (int i = 0; i < Model.MedicamentosPrescritos.Count; i++) { <div class="mb-3">
+        <label asp-for="MedicamentosPrescritos[@i].MedicamentoId"
+            class="form-label fw-semibold text-primary text-uppercase small">Medicamento</label>
+        <select asp-for="MedicamentosPrescritos[@i].MedicamentoId" class="form-select">
+            <option value="">Selecione um medicamento</option>
+            @foreach (OpcaoMedicamentoViewModel medicamento in Model.Medicamentos)
+            {
+            <option value="@medicamento.Id">@medicamento.Nome</option>
+            }
+        </select>
+        <span asp-validation-for="MedicamentosPrescritos[@i].MedicamentoId"
+            class="text-danger small fw-semibold"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MedicamentosPrescritos[@i].Quantidade"
+                class="form-label fw-semibold text-primary text-uppercase small">Quantidade</label>
+            <input asp-for="MedicamentosPrescritos[@i].Quantidade" type="number" min="1" class="form-control" />
+            <span asp-validation-for="MedicamentosPrescritos[@i].Quantidade"
+                class="text-danger small fw-semibold"></span>
+        </div>
+        }
+
+        <!-- Botões -->
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
+            @if (Model.Pacientes.Count == 0 || Model.Medicamentos.Count == 0)
+            {
+            <button class="btn btn-primary rounded-pill px-4" type="submit" disabled>Confirmar</button>
+            }
+            else
+            {
+            <button class="btn btn-primary rounded-pill px-4" type="submit">Confirmar</button>
+            }
+        </div>
+</form>

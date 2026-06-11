@@ -11,10 +11,20 @@ public class EstoqueController(ServicoEstoque servicoEstoque, IMapper mapeador) 
     [HttpGet]
     public ActionResult Listar()
     {
-        List<ListarRequisicoesEntradaDto> dtos = servicoEstoque.SelecionarRequisicoesEntrada();
-        List<ListarRequisicoesEntradaViewModel> listarVms = mapeador.Map<List<ListarRequisicoesEntradaViewModel>>(dtos);
+        // Entradas
+        List<ListarRequisicoesEntradaDto> entradasDto = servicoEstoque.SelecionarRequisicoesEntrada();
+        List<ListarRequisicoesEntradaViewModel> entradasVm =
+            mapeador.Map<List<ListarRequisicoesEntradaViewModel>>(entradasDto);
 
-        return View(listarVms);
+        // Saídas
+        List<ListarRequisicoesSaidaDto> saidasDto = servicoEstoque.SelecionarRequisicoesSaida();
+        List<ListarRequisicoesSaidaViewModel> saidasVm =
+            mapeador.Map<List<ListarRequisicoesSaidaViewModel>>(saidasDto);
+
+        // ViewModel composto
+        EstoqueViewModel vm = new EstoqueViewModel(entradasVm, saidasVm);
+
+        return View(vm);
     }
 
     [HttpGet]
@@ -51,6 +61,39 @@ public class EstoqueController(ServicoEstoque servicoEstoque, IMapper mapeador) 
         return RedirectToAction(nameof(Listar));
     }
 
+    [HttpGet]
+    public ActionResult CadastrarSaida()
+    {
+        var cadastrarVm = new CadastrarRequisicaoSaidaViewModel(
+            Guid.Empty,
+            new List<MedicamentoPrescritoViewModel> { new MedicamentoPrescritoViewModel(Guid.Empty, 0) },
+            SelecionarPacientes(),
+            SelecionarMedicamentos()
+        );
+
+        return View(cadastrarVm);
+    }
+
+    [HttpPost]
+    public ActionResult CadastrarSaida(CadastrarRequisicaoSaidaViewModel cadastrarVm)
+    {
+        if (!ModelState.IsValid)
+            return View(cadastrarVm with { Pacientes = SelecionarPacientes(), Medicamentos = SelecionarMedicamentos() });
+
+        var dto = mapeador.Map<CadastrarRequisicaoSaidaDto>(cadastrarVm);
+
+        Result resultado = servicoEstoque.CadastrarSaida(dto);
+
+        if (resultado.IsFailed)
+        {
+            ModelState.AddModelError(resultado);
+            return View(cadastrarVm with { Pacientes = SelecionarPacientes(), Medicamentos = SelecionarMedicamentos() });
+        }
+
+        return RedirectToAction(nameof(Listar));
+    }
+
+
     private List<OpcaoFuncionarioViewModel> SelecionarFuncionarios()
     {
         List<OpcaoFuncionarioDto> dtos = servicoEstoque.SelecionarFuncionarios();
@@ -63,6 +106,13 @@ public class EstoqueController(ServicoEstoque servicoEstoque, IMapper mapeador) 
         List<OpcaoMedicamentoDto> dtos = servicoEstoque.SelecionarMedicamentos();
 
         return mapeador.Map<List<OpcaoMedicamentoViewModel>>(dtos);
+    }
+
+    private List<OpcaoPacienteViewModel> SelecionarPacientes()
+    {
+        List<OpcaoPacienteDto> dtos = servicoEstoque.SelecionarPacientes();
+
+        return mapeador.Map<List<OpcaoPacienteViewModel>>(dtos);
     }
 
 }
