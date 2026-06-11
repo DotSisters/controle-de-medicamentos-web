@@ -103,13 +103,9 @@ public class ServicoEstoque
             if (medicamentoSelecionado == null)
                 return Falha(nameof(medDto.MedicamentoId), "Selecione um medicamento válido.");
 
-            // if (medicamentoSelecionado.QuantidadeEstoque < medDto.Quantidade)
-            //     return Falha(nameof(medDto.Quantidade), $"Estoque insuficiente para {medicamentoSelecionado.Nome}.");
-
             if (medicamentoSelecionado.QuantidadeEstoque < medDto.Quantidade)
                 return Falha($"MedicamentosPrescritos[{dto.MedicamentosPrescritos.IndexOf(medDto)}].Quantidade",
                              $"Estoque insuficiente para {medicamentoSelecionado.Nome}.");
-
 
             medicamentosPrescritos.Add(new MedicamentoPrescrito(medicamentoSelecionado, medDto.Quantidade));
         }
