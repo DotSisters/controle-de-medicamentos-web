@@ -99,13 +99,20 @@ public class ServicoFuncionario
         ));
     }
 
+    private string NormalizarCpf(string cpf)
+    {
+        return new string(cpf.Where(char.IsDigit).ToArray());
+    }
+
     private bool ExisteFuncionarioComMesmoCPF(string cpf, Guid? idIgnorado = null)
     {
+        string cpfNormalizado = NormalizarCpf(cpf);
+
         return repositorioFuncionario
             .SelecionarTodos()
             .Any(f =>
                 f.Id != idIgnorado &&
-                string.Equals(f.CPF, cpf, StringComparison.OrdinalIgnoreCase)
+                NormalizarCpf(f.CPF) == cpfNormalizado
             );
     }
 
