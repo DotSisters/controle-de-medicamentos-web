@@ -45,8 +45,21 @@
 
     @* Cabeçalho da Página *@
     <header class="container py-4">
-        <h2>@ViewBag.Titulo</h2>
-        <p>@ViewBag.Info</p>
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <h2>@ViewBag.Titulo</h2>
+                <p class="mb-0">@ViewBag.Info</p>
+            </div>
+
+            @if (ViewBag.TextoBotao != null)
+            {
+                <a class="btn btn-primary rounded-pill px-4 mt-4"
+                  asp-controller="@ViewBag.ControllerBotao"
+                  asp-action="@ViewBag.ActionBotao">
+                    @ViewBag.TextoBotao
+                </a>
+            }
+        </div>
     </header>
 
     @* Conteúdo da Página *@
