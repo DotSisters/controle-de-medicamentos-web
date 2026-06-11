@@ -24,7 +24,7 @@ public record CadastrarMedicamentoViewModel(
     string Nome,
 
     [Required(ErrorMessage = "O campo \"Descrição\" deve ser preenchido.")]
-    [StringLength(255, MinimumLength = 5, ErrorMessage = "O campo \"Descrição\" deve conter entre 3 e 100 caracteres.")]
+    [StringLength(255, MinimumLength = 5, ErrorMessage = "O campo \"Descrição\" deve conter entre 5 e 255 caracteres.")]
     string Descricao,
 
     [Required(ErrorMessage = "O campo \"Fornecedor\" deve ser preenchido.")]
