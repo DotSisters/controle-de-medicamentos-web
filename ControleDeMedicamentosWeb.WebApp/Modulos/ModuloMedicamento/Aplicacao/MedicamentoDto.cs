@@ -4,14 +4,13 @@ namespace ControleDeMedicamentosWeb.WebApp.Modulos.ModuloMedicamento.Aplicacao;
 public record ListarMedicamentosDto(
     Guid Id,
     string Nome,
-    int QuantidadeEstoque,
+    uint QuantidadeEstoque,
     string Descricao,
     string FornecedorNome
 );
 
 public record CadastrarMedicamentoDto(
     string Nome,
-    int QuantidadeEstoque,
     string Descricao,
     Guid FornecedorId
 );
@@ -19,14 +18,13 @@ public record CadastrarMedicamentoDto(
 public record EditarMedicamentoDto(
     Guid Id,
     string Nome,
-    int QuantidadeEstoque,
     string Descricao,
     Guid FornecedorId
 );
 public record DetalhesMedicamentoDto(
     Guid Id,
     string Nome,
-    int QuantidadeEstoque,
+    uint QuantidadeEstoque,
     string Descricao,
     Guid FornecedorId,
     string FornecedorNome

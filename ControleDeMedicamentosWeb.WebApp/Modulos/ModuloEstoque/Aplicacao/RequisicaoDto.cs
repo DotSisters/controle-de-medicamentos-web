@@ -5,7 +5,7 @@ public record ListarRequisicoesEntradaDto(
     DateTime DataCriacao,
     string NomeFuncionario,
     string NomeMedicamento,
-    decimal Quantidade
+    uint Quantidade
 );
 
 public record ListarRequisicoesSaidaDto(
@@ -17,7 +17,7 @@ public record ListarRequisicoesSaidaDto(
 public record CadastrarRequisicaoEntradaDto(
     Guid FuncionarioId,
     Guid MedicamentoId,
-    decimal Quantidade
+    uint Quantidade
 );
 
 public record OpcaoFuncionarioDto(

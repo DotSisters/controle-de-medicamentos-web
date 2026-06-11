@@ -25,7 +25,7 @@ public record CadastrarRequisicaoEntradaViewModel(
     Guid MedicamentoId,
 
     [Range(0.01, double.MaxValue, ErrorMessage = "O campo \"Quantidade\" deve conter um valor maior que 0.")]
-    decimal Quantidade,
+    uint Quantidade,
 
     [ValidateNever] List<OpcaoFuncionarioViewModel> Funcionarios,
 
