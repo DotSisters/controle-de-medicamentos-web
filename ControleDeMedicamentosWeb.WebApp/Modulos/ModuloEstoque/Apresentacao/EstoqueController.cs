@@ -3,7 +3,6 @@ using ControleDeMedicamentosWeb.WebApp.Compartilhado.Apresentacao.Extensions;
 using ControleDeMedicamentosWeb.WebApp.Modulos.ModuloEstoque.Aplicacao;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-
 namespace ControleDeMedicamentosWeb.WebApp.Modulos.ModuloEstoque.Apresentacao;
 
 public class EstoqueController(ServicoEstoque servicoEstoque, IMapper mapeador) : Controller
@@ -11,17 +10,14 @@ public class EstoqueController(ServicoEstoque servicoEstoque, IMapper mapeador) 
     [HttpGet]
     public ActionResult Listar()
     {
-        // Entradas
         List<ListarRequisicoesEntradaDto> entradasDto = servicoEstoque.SelecionarRequisicoesEntrada();
         List<ListarRequisicoesEntradaViewModel> entradasVm =
             mapeador.Map<List<ListarRequisicoesEntradaViewModel>>(entradasDto);
 
-        // Saídas
         List<ListarRequisicoesSaidaDto> saidasDto = servicoEstoque.SelecionarRequisicoesSaida();
         List<ListarRequisicoesSaidaViewModel> saidasVm =
             mapeador.Map<List<ListarRequisicoesSaidaViewModel>>(saidasDto);
 
-        // ViewModel composto
         EstoqueViewModel vm = new EstoqueViewModel(entradasVm, saidasVm);
 
         return View(vm);
@@ -92,27 +88,22 @@ public class EstoqueController(ServicoEstoque servicoEstoque, IMapper mapeador) 
 
         return RedirectToAction(nameof(Listar));
     }
-
-
     private List<OpcaoFuncionarioViewModel> SelecionarFuncionarios()
     {
         List<OpcaoFuncionarioDto> dtos = servicoEstoque.SelecionarFuncionarios();
 
         return mapeador.Map<List<OpcaoFuncionarioViewModel>>(dtos);
     }
-
     private List<OpcaoMedicamentoViewModel> SelecionarMedicamentos()
     {
         List<OpcaoMedicamentoDto> dtos = servicoEstoque.SelecionarMedicamentos();
 
         return mapeador.Map<List<OpcaoMedicamentoViewModel>>(dtos);
     }
-
     private List<OpcaoPacienteViewModel> SelecionarPacientes()
     {
         List<OpcaoPacienteDto> dtos = servicoEstoque.SelecionarPacientes();
 
         return mapeador.Map<List<OpcaoPacienteViewModel>>(dtos);
     }
-
 }

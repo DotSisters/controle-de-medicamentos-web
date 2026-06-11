@@ -25,7 +25,6 @@ ViewBag.Info = "";
 <form class="card border-primary-subtle shadow-sm mx-auto p-4 bg-transparent" style="max-width: 620px;"
     asp-action="CadastrarSaida" method="post">
 
-    <!-- Paciente -->
     <div class="mb-3">
         <label asp-for="PacienteId" class="form-label fw-semibold text-primary text-uppercase small">Paciente</label>
         <select asp-for="PacienteId" class="form-select">
@@ -38,7 +37,6 @@ ViewBag.Info = "";
         <span asp-validation-for="PacienteId" class="text-danger small fw-semibold"></span>
     </div>
 
-    <!-- Medicamentos Prescritos -->
     @for (int i = 0; i < Model.MedicamentosPrescritos.Count; i++) { <div class="mb-3">
         <label asp-for="MedicamentosPrescritos[@i].MedicamentoId"
             class="form-label fw-semibold text-primary text-uppercase small">Medicamento</label>
@@ -62,7 +60,6 @@ ViewBag.Info = "";
         </div>
         }
 
-        <!-- Botões -->
         <div class="d-flex justify-content-end gap-2 mt-4">
             <a class="btn btn-outline-primary rounded-pill px-4" asp-action="Listar">Voltar</a>
             @if (Model.Pacientes.Count == 0 || Model.Medicamentos.Count == 0)

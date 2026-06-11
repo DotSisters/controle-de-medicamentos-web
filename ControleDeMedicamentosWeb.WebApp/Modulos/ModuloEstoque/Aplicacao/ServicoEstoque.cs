@@ -90,12 +90,10 @@ public class ServicoEstoque
 
     public Result CadastrarSaida(CadastrarRequisicaoSaidaDto dto)
     {
-        // Seleciona paciente
         Paciente? pacienteSelecionado = repositorioPaciente.SelecionarPorId(dto.PacienteId);
         if (pacienteSelecionado == null)
             return Falha(nameof(dto.PacienteId), "Selecione um paciente válido.");
 
-        // Monta lista de medicamentos prescritos
         List<MedicamentoPrescrito> medicamentosPrescritos = new();
 
         foreach (var medDto in dto.MedicamentosPrescritos)
@@ -111,7 +109,6 @@ public class ServicoEstoque
             medicamentosPrescritos.Add(new MedicamentoPrescrito(medicamentoSelecionado, medDto.Quantidade));
         }
 
-        // Cria a requisição de saída
         RequisicaoSaida novaSaida = new RequisicaoSaida(pacienteSelecionado, medicamentosPrescritos);
 
         repositorioRequisicao.Cadastrar(novaSaida);

@@ -36,8 +36,6 @@ public record MedicamentoSaidaDto(
     uint Quantidade
 );
 
-
-
 public record OpcaoFuncionarioDto(
     Guid Id,
     string Nome
