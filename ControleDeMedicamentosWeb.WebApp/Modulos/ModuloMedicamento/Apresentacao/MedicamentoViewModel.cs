@@ -14,7 +14,8 @@ public record ListarMedicamentosViewModel(
     string Nome,
     uint QuantidadeEstoque,
     string Descricao,
-    string FornecedorNome
+    string FornecedorNome,
+    string StatusEstoque
 );
 
 public record CadastrarMedicamentoViewModel(

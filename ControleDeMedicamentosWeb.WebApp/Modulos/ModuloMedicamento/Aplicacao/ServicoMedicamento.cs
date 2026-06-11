@@ -91,7 +91,8 @@ public class ServicoMedicamento
             m.Nome,
             m.QuantidadeEstoque,
             m.Descricao,
-            m.Fornecedor.Nome
+            m.Fornecedor.Nome,
+            m.StatusEstoque
              ))
             .ToList();
     }

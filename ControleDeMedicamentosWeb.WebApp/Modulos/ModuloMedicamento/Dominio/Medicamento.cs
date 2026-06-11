@@ -36,7 +36,7 @@ public class Medicamento : EntidadeBase<Medicamento>
         }
     }
 
-    // public string StatusEstoque => QuantidadeEstoque < 20 ? "EM FALTA" : "EM ESTOQUE";
+    public string StatusEstoque => QuantidadeEstoque < 20 ? "Em falta" : "Em estoque";
 
     public Medicamento()
     {

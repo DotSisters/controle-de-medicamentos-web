@@ -6,7 +6,8 @@ public record ListarMedicamentosDto(
     string Nome,
     uint QuantidadeEstoque,
     string Descricao,
-    string FornecedorNome
+    string FornecedorNome,
+    string StatusEstoque
 );
 
 public record CadastrarMedicamentoDto(
