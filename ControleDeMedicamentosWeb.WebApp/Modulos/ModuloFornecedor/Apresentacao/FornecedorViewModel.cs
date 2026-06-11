@@ -19,7 +19,8 @@ public record CadastrarFornecedorViewModel(
     string Telefone,
 
     [Required(ErrorMessage = "O campo \"CNPJ\" deve ser preenchido.")]
-    [RegularExpression(@"^\d{14}$", ErrorMessage = "O campo \"CNPJ\" deve conter 14 dígitos.")]
+    [RegularExpression(@"^(\d{14}|\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2})$",
+    ErrorMessage = "O campo \"CNPJ\" deve conter 14 dígitos.")]
     string Cnpj
 );
 

@@ -16,10 +16,12 @@ public class ServicoFornecedor
 
     public Result Cadastrar(CadastrarFornecedorDto dto)
     {
-        if (ExisteFornecedorCnpj(dto.Cnpj))
+        string cnpjNormalizado = NormalizarCnpj(dto.Cnpj);
+
+        if (ExisteFornecedorCnpj(cnpjNormalizado))
             return Falha(nameof(dto.Cnpj), "Já existe um Fornecedor com esse CNPJ.");
 
-        Fornecedor novoFornecedor = new Fornecedor(dto.Nome, dto.Telefone, dto.Cnpj);
+        Fornecedor novoFornecedor = new Fornecedor(dto.Nome, dto.Telefone, cnpjNormalizado);
 
         Result resultadoValidacao = ValidarEntidade(novoFornecedor);
 
@@ -38,21 +40,23 @@ public class ServicoFornecedor
         if (fornecedor == null)
             return Result.Fail("Fornecedor não encontrado.");
 
-        if (ExisteFornecedorCnpj(dto.Cnpj, dto.Id))
+        string cnpjNormalizado = NormalizarCnpj(dto.Cnpj);
+
+        if (ExisteFornecedorCnpj(cnpjNormalizado, dto.Id))
             return Falha(nameof(dto.Cnpj), "Já existe um fornecedor com este CNPJ cadastrado.");
 
-        Fornecedor pacienteAtualizado = new Fornecedor(
+        Fornecedor fornecedorAtualizado = new Fornecedor(
             dto.Nome,
             dto.Telefone,
-            dto.Cnpj
+            cnpjNormalizado
         );
 
-        Result resultadoValidacao = ValidarEntidade(pacienteAtualizado);
+        Result resultadoValidacao = ValidarEntidade(fornecedorAtualizado);
 
         if (resultadoValidacao.IsFailed)
             return resultadoValidacao;
 
-        repositorioFornecedor.Editar(dto.Id, pacienteAtualizado);
+        repositorioFornecedor.Editar(dto.Id, fornecedorAtualizado);
 
         return Result.Ok();
     }
@@ -94,15 +98,19 @@ public class ServicoFornecedor
         );
     }
 
+    private string NormalizarCnpj(string cnpj)
+    {
+        return new string(cnpj.Where(char.IsDigit).ToArray());
+    }
     private bool ExisteFornecedorCnpj(string cnpj, Guid? idIgnorado = null)
     {
-        string cnpjNormalizado = Fornecedor.RemoverFormatacao(cnpj);
+        string cnpjNormalizado = NormalizarCnpj(cnpj);
 
         return repositorioFornecedor
             .SelecionarTodos()
             .Any(f =>
                 f.Id != idIgnorado &&
-                Fornecedor.RemoverFormatacao(f.Cnpj) == cnpjNormalizado
+                NormalizarCnpj(f.Cnpj) == cnpjNormalizado
             );
     }
 
