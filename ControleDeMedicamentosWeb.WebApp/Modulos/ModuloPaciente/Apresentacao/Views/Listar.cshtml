@@ -11,7 +11,7 @@
 
 @model List<ListarPacientesViewModel>
 
-<div class="card border-primary-subtle shadow-sm mx-auto p-4 bg-transparent">
+<div class="card border-primary-subtle rounded-4 shadow-sm mx-auto p-4 bg-transparent">
 
   @if (TempData["MensagemErro"] is string mensagemErro)
   {
@@ -28,9 +28,9 @@
   }
   else
   {
-    <div class="table-responsive mt-3 mb-3">
-      <table class="table table-hover table-bordered align-middle bg-white">
-        <thead class=" table-primary">
+    <div class="table-responsive tabela-container mt-3 mb-3">
+      <table class="table table-hover table-bordered align-middle bg-white tabela-modulo">
+        <thead>
           <tr>
             <th>ID</th>
             <th>Nome</th>
@@ -50,8 +50,8 @@
               <td>@p.CartaoSUS</td>
               <td>@p.CPF</td>
               <td>
-                <div class="d-flex flex-sm-row flex-column gap-2">
-                  <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
+                <div class="d-flex flex-sm-row flex-column justify-content-center align-items-center gap-2">
+                  <a class="btn btn-outline-primary btn-sm rounded-pill px-3 btn-edit" asp-action="Editar"
                      asp-route-id="@p.Id">Editar</a>
                   <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
                      asp-route-id="@p.Id">Excluir</a>

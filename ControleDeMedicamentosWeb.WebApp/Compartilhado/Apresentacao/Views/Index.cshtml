@@ -1,58 +1,68 @@
 ﻿@{
-Layout = "_Layout";
-ViewBag.Titulo = "Página Inicial";
+  Layout = "_Layout";
 }
 
 <div class="row">
   <div class="col-lg-7">
-    <h1 class="display-5 fw-semibold mb-3">Controle de Medicamentos</h1>
+    <h1 class="display-5 fw-semibold mb-3 mt-4 pt-3" style="color: rgb(0, 35, 84)">Controle de Medicamentos</h1>
+    @* <h1 class="display-5 fw-semibold mb-3"
+    style="color: rgb(0, 35, 84)">
+    Controle de Medicamentos
+</h1> *@
     <p class="lead text-secondary mb-4">
       Gerencie o controle de medicamentos cadastrando fármacos, organizando estoques e registrando entradas e saídas.
     </p>
-
-    <div class="d-flex flex-wrap gap-2">
-      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Fornecedor" asp-action="Listar">Fornecedores</a>
-      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Paciente" asp-action="Listar">Pacientes</a>
-      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Medicamento"
+    <div class="d-flex flex-wrap gap-2 mt-4 d-none d-md-block">
+      <a class="btn btn-primary rounded-pill px-4 mb-3 btn-home" asp-controller="Fornecedor"
+         asp-action="Listar">Fornecedores</a>
+      <a class="btn btn-primary rounded-pill px-4 mb-3 btn-home" asp-controller="Paciente"
+         asp-action="Listar">Pacientes</a>
+      <a class="btn btn-primary rounded-pill px-4 mb-3 btn-home" asp-controller="Medicamento"
          asp-action="Listar">Medicamentos</a>
-      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Funcionario"
+      <a class="btn btn-primary rounded-pill px-4 mb-3 btn-home" asp-controller="Funcionario"
          asp-action="Listar">Funcionários</a>
-      <a class="btn btn-primary rounded-pill px-4 mb-3" asp-controller="Estoque" asp-action="Listar">Estoque</a>
+      <a class="btn btn-primary rounded-pill px-4 mb-3 btn-home" asp-controller="Estoque"
+         asp-action="Listar">Estoque</a>
+
+      <div class="index-img">
+        <img src="~/img/drugstore.png" alt="Medicamentos" class="index-img" />
+      </div>
     </div>
 
   </div>
 
-  <div class="col-lg-5">
-    <div class="card border-primary-subtle shadow-sm bg-transparent">
-      <div class="card-body p-4 bg-transparent">
-        <h3 class="h5 text-primary mb-4">Módulos disponíveis</h3>
+  <div class="col-lg-5 mt-4">
+    <div class="card border-primary-subtle shadow-sm rounded-4"
+         style="background-image: radial-gradient(circle,rgba(50, 121, 221, 1) 0%, rgba(54, 92, 145, 1) 100%);">
+      <div class="card-body p-4">
+        <h4 class="h4 text-primary mb-4 text-white p-2">Módulos disponíveis</h4>
 
-        <div class="list-group">
-          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+        <div class="list-group gap-1">
+          <a class="modulo-card list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-medium border-primary shadow-sm border-1 rounded-3 mb-4 p-2.5"
              asp-controller="Fornecedor" asp-action="Listar">
             🏷️ Controle de Fornecedores
             <span class="badge text-bg-primary rounded-pill">Abrir</span>
           </a>
 
-          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+          <a class="modulo-card list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-medium border-primary shadow-sm border-1 rounded-3 mb-4 p-2.5"
              asp-controller="Paciente" asp-action="Listar">
             🧑‍⚕️ Controle de Pacientes
             <span class="badge text-bg-primary rounded-pill">Abrir</span>
           </a>
 
-          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+          <a class="modulo-card list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-medium border-primary shadow-sm border-1 rounded-3 mb-4 p-2.5"
              asp-controller="Medicamento" asp-action="Listar">
             💊 Controle de Medicamentos
             <span class="badge text-bg-primary rounded-pill">Abrir</span>
           </a>
 
-          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+          <a class="modulo-card list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-medium border-primary shadow-sm border-1 rounded-3 mb-4 p-2.5"
              asp-controller="Funcionario" asp-action="Listar">
             👩‍💼 Controle de Funcionários
             <span class="badge text-bg-primary rounded-pill">Abrir</span>
           </a>
 
-          <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent fw-medium border-primary shadow-sm border-1 rounded-3 mb-3"
+          <a class="modulo-card list-group-item list-group-item-action d-flex justify-content-between align-items-center fw-medium border-primary shadow-sm border-1 rounded-3 mb-4 p-2.5"
              asp-controller="Estoque" asp-action="Listar">
             📦 Controle de Estoque
             <span class="badge text-bg-primary rounded-pill">Abrir</span>
@@ -60,5 +70,8 @@ ViewBag.Titulo = "Página Inicial";
         </div>
       </div>
     </div>
+
+    @* <img src="~/img/medicamento.png" alt="Medicamentos" class="home-decoration" /> *@
   </div>
 </div>
+
