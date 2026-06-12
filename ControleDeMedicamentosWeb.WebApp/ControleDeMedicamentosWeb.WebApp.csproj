@@ -25,6 +25,9 @@
     <Folder Include="Modulos/ModuloPaciente/Infra/" />
     <Folder Include="Modulos\ModuloFornecedor\" />
     <Folder Include="Modulos\ModuloMedicamento\" />
+    <Folder Include="wwwroot/" />
+    <Folder Include="wwwroot/css/" />
+    <Folder Include="wwwroot/img/" />
   </ItemGroup>
 
 </Project>

@@ -1,51 +1,56 @@
 ﻿@{
-Layout = "_Layout";
-ViewBag.Titulo = "Funcionários";
-ViewBag.Info = "Cadastre, visualize e gerencie funcionários.";
+  Layout = "_Layout";
+  ViewBag.Titulo = "👩‍💼 Funcionários";
+  ViewBag.Info = "Cadastre, visualize e gerencie funcionários.";
+
+  ViewBag.TextoBotao = "Cadastrar Funcionário";
+  ViewBag.ControllerBotao = "Funcionario";
+  ViewBag.ActionBotao = "Cadastrar";
 }
 
 @model List<ListarFuncionariosViewModel>
 
-  <a class="btn btn-primary rounded-pill px-4 mb-4" asp-action="Cadastrar">Cadastrar Funcionário</a>
+<div class="card border-primary-subtle rounded-4 shadow-sm mx-auto p-4 bg-transparent">
 
   @if (Model.Count == 0)
   {
-  <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
-    Nenhum funcionário cadastrado.
-  </div>
+    <div class="alert alert-primary border-start border-primary border-2 rounded-3" role="alert">
+      Nenhum funcionário cadastrado.
+    </div>
   }
   else
   {
-  <div class="table-responsive">
-    <table class="table table-hover table-bordered align-middle bg-white">
-      <thead class=" table-primary">
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Telefone</th>
-          <th>CPF</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach (ListarFuncionariosViewModel f in Model)
-        {
-        <tr class="bg-transparent">
-          <td>@f.Id.ToString().Substring(0, 8)</td>
-          <td>@f.Nome</td>
-          <td>@f.Telefone</td>
-          <td>@f.CPF</td>
-          <td>
-            <div class="d-flex flex-sm-row flex-column gap-2">
-              <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
-                asp-route-id="@f.Id">Editar</a>
-              <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
-                asp-route-id="@f.Id">Excluir</a>
-            </div>
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+    <div class="table-responsive tabela-container mt-3 mb-3">
+      <table class="table table-hover table-bordered align-middle bg-white tabela-modulo">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>CPF</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (ListarFuncionariosViewModel f in Model)
+          {
+            <tr class="bg-transparent">
+              <td>@f.Id.ToString().Substring(0, 8)</td>
+              <td>@f.Nome</td>
+              <td>@f.Telefone</td>
+              <td>@f.CPF</td>
+              <td>
+                <div class="d-flex flex-sm-row flex-column justify-content-center align-items-center gap-2">
+                  <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Editar"
+                     asp-route-id="@f.Id">Editar</a>
+                  <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-action="Excluir"
+                     asp-route-id="@f.Id">Excluir</a>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   }
+</div>
