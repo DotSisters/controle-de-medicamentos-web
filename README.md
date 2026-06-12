@@ -97,11 +97,13 @@ Campos obrigatórios:
 ** O sistema não deve permitir cadastro de funcionários com mesmo CPF
 
 📦 5. Módulo de Estoque
-<p align="center">
-<img src="./.docs/estoque.gif">
-</p>
 
 5.1 Requisições de Entrada
+
+<p align="center">
+<img src="./.docs/estoqueentrada.gif">
+</p>
+
 Requisitos Funcionais
 
 - O sistema deve permitir registrar novas requisições de entrada
@@ -119,6 +121,11 @@ Campos obrigatórios:
 ** O sistema deve atualizar o estoque ao registrar a requisição de entrada
 
 5.2 Requisições de Saída
+
+<p align="center">
+<img src="./.docs/estoquesaida.gif">
+</p>
+
 Requisitos Funcionais
 
 - O sistema deve permitir registrar novas requisições de saída
