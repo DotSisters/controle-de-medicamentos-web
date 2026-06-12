@@ -46,7 +46,7 @@
     </nav>
 
     @* Cabeçalho da Página *@
-    <header class="container py-4 mt-3">
+    <header class="container py-4 mt-4">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-start gap-3">
             <div>
                 <h2 style="color: rgb(0, 35, 84)">@ViewBag.Titulo</h2>
@@ -55,7 +55,7 @@
 
             @if (ViewBag.TextoBotao != null)
             {
-                <a class="btn btn-primary rounded-pill px-4 align-self-start"
+                <a class="btn btn-primary rounded-pill px-4 align-self-start mt-4"
                   asp-controller="@ViewBag.ControllerBotao"
                   asp-action="@ViewBag.ActionBotao">
                     @ViewBag.TextoBotao
